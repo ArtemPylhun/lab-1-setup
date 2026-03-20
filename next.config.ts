@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/lab-1-setup",
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
 
-  /* config options here */
-  reactCompiler: true,
+const nextConfig: NextConfig = {
+  output: isGithubActions ? "export" : undefined,
+  basePath: isGithubActions ? "/lab-1-setup" : "",
+  
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
